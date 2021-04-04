@@ -22,44 +22,26 @@ using System.Text;
 
 namespace S2_HW31._03._21
 {
-    class Event
+    class Event : EventService
     {
-        string name;
-        uint people;
-        string place;
+        static uint counter = 0;
         DateTime date;
-        static readonly uint counter;
 
-        public Event(string name = "NoName", uint people = 0, string place = "Unknown", DateTime date = default)
+        public Event()
         {
-            this.Name = name;
-            this.People = people;
-            this.Place = place;
-            if(date==default)
-            {
-                this.Date = DateTime.Today;
-            }
-            else
-            {
-                this.Date = date;
-            }
-            
+            counter++;
+            ID = counter;
+            Console.Write("Enter name of event: ");
+            Name = Console.ReadLine();
+            Console.Write("Enter count of people: ");
+            People = Convert.ToUInt32(Console.ReadLine());
+            Console.Write("Enter event's place: ");
+            Place = Console.ReadLine();
+            Console.Write("Enter date of event(dd/mm/yyyy): ");
+            Date = Convert.ToDateTime(Console.ReadLine());
+            Client = new Client();            
         }
-        public string Name 
-        {
-            get => this.name;
-            set 
-            {
-                if(!string.IsNullOrWhiteSpace(value))
-                {
-                    this.name = value;
-                }
-                else
-                {
-                    this.name = "Unknown";
-                }
-            }
-        }
+        public string Name { get; set; }
         public uint People { get; set; }
         public string Place { get; set; }
         public DateTime Date 
@@ -67,15 +49,30 @@ namespace S2_HW31._03._21
             get => this.date;
             set 
             {
-                if(Date < DateTime.Now)
+                if (value < DateTime.Now)
                 {
-                    this.date = default;
+                    this.date = DateTime.Now;
+                }
+                else
+                {
+                    this.date = value;
                 }
             }
         }
+        public uint ID { get; set; }
+        public Client Client { get; set; }
         public override string ToString()
         {
-            return $"\n{counter}\nName: {Name}\nPeople: {People}\nPlace: {Place}\nDate: {Date}\n";
+            return $"\n{counter}\nName: {Name}\nPeople: {People}\nPlace: {Place}\nDate: {Date}\nClient: {Client.ToString()}";
+        }
+
+        public void AddDaysToEvent(int days)
+        {
+            this.date = date.AddDays(days);
+        }
+        public void AddWeeksToEvent(int weeks)
+        {
+            this.date = date.AddDays(weeks * 7);
         }
         
     }

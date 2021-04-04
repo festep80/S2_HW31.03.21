@@ -16,7 +16,13 @@ namespace S2_HW31._03._21
     {
         string name;
         string phone;
-
+        public Client()
+        {
+            Console.Write("Enter name of client: ");
+            Name = Console.ReadLine();
+            Console.Write("Enter phone(10 digits): ");
+            Phone = Console.ReadLine();
+        }
         public string Name 
         { 
             get { return this.name; } 
@@ -33,11 +39,13 @@ namespace S2_HW31._03._21
             get { return this.phone; }
             set 
             {
-                
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this.phone = value;
+                }
             }
         }
 
-        public override string ToString() => $"Name: {this.Name}\nPhone: {this.Phone}\n";
-        
+        public override string ToString() => $"Name: {this.Name}\nPhone: {this.Phone}\n";            
     }
 }
