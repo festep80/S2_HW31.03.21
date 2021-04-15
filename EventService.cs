@@ -57,18 +57,72 @@ namespace S2_HW31._03._21
         }
         public static void NewEvent()
         {
-            Console.Write("Enter phone: ");
-            Event _event = new(clients.Find(x => x.Phone.Contains(Console.ReadLine())));
-            events.Add(_event);
+            Console.Clear();
+            if (clients.Any() == true)
+            {
+                Console.Write("Enter phone: ");
+                string phone = Console.ReadLine();
+                int findItem = 0;
+                foreach (var item in clients)
+                {
+                    if(item.Phone == phone)
+                    {
+                        Event _event = new(item);
+                        events.Add(_event);
+                        findItem++;
+                    }                    
+                }
+                if (findItem == 0)
+                {
+                    Console.WriteLine("There are no clients with this phone in the database.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no clients in the database.");
+            }
+            Console.ReadKey();
+            
         }
         public static void DelEvent()
         {
-            Console.Write("Enter event name: ");            
-            events.Remove(events.Find(x => x.Name.Contains(Console.ReadLine())));
+            if (events.Any() == true)
+            {
+                Console.Write("Enter event name: ");
+                string name = Console.ReadLine();
+                int findName = 0;
+                foreach (var item in events)
+                {
+                    if (item.Name == name)
+                    {
+                        events.Remove(item);
+                        findName++;
+                    }
+                }
+                if (findName == 0)
+                {
+                    Console.WriteLine("There are no events with this name in the database.");                    
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no events in the database.");                
+            }
+            Console.ReadKey();
         }
         public static void ClearEvents()
         {
-            events.Clear();
+            if (events.Any() == true)
+            {
+                events.Clear();
+                Console.WriteLine("All events deleted.");
+            }
+            else
+            {
+                Console.WriteLine("There are no events in the database.");
+            }
+            Console.ReadKey();
+
         }
         public static void FindDate()
         {

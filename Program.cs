@@ -38,7 +38,7 @@ namespace S2_HW31._03._21
                             Console.WriteLine("2.Find client");
                             Console.WriteLine("3.Show clients");
                             Console.WriteLine("0.Return to main menu");
-                            Console.Write("->");
+                            Console.Write("-> ");
                             switchClients = (Clients)Convert.ToInt32(Console.ReadLine());
                             switch (switchClients)
                             {
