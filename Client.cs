@@ -46,6 +46,6 @@ namespace S2_HW31._03._21
             }
         }
 
-        public override string ToString() => $"Name: {this.Name}\nPhone: {this.Phone}\n";            
+        public override string ToString() => $"\nName: {this.Name}\tPhone: {this.Phone}";         
     }
 }

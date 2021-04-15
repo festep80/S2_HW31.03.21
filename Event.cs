@@ -15,6 +15,15 @@
 //Визначити  властивості для полів класу.
 //*Перевіряти правильність дати події(не раніше сьогоднішньої), властивості DateTime.Today, DateTime.Now
 //Перевизначити(override) метод ToString()
+//EventService
+//	список запланованих(замовлених) заходів, List<Event>
+//Методи
+//	додавання події до списку подій
+//	видалення події
+//	очищення списку подій(Clear)
+//	пошук(вивід) подій замовлених на певну дату
+//	пошук(вивід) подій замовлених на певний діапазон дат(дати можна порівнювати операціями >, <, методом CompareTo)
+//	пошук(вивід) подій замовлених певним клієнтом
 
 using System;
 using System.Collections.Generic;
@@ -22,12 +31,13 @@ using System.Text;
 
 namespace S2_HW31._03._21
 {
-    class Event : EventService
+    class Event 
     {
         static uint counter = 0;
         DateTime date;
+        
 
-        public Event()
+        public Event(Client client)
         {
             counter++;
             ID = counter;
@@ -37,9 +47,9 @@ namespace S2_HW31._03._21
             People = Convert.ToUInt32(Console.ReadLine());
             Console.Write("Enter event's place: ");
             Place = Console.ReadLine();
-            Console.Write("Enter date of event(dd/mm/yyyy): ");
-            Date = Convert.ToDateTime(Console.ReadLine());
-            Client = new Client();            
+            Console.Write("Enter date of event(mm/dd/yyyy): ");
+            Date = DateTime.Parse(Console.ReadLine());
+            Client = client;           
         }
         public string Name { get; set; }
         public uint People { get; set; }
@@ -74,7 +84,7 @@ namespace S2_HW31._03._21
         {
             this.date = date.AddDays(weeks * 7);
         }
-        
+       
     }
     
 }

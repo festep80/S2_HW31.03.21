@@ -1,37 +1,73 @@
-﻿//EventService
-//	список запланованих(замовлених) заходів, List<Event>
-//Методи
-//	додавання події до списку подій
-//	видалення події
-//	очищення списку подій(Clear)
-//	пошук(вивід) подій замовлених на певну дату
-//	пошук(вивід) подій замовлених на певний діапазон дат(дати можна порівнювати операціями >, <, методом CompareTo)
-//	пошук(вивід) подій замовлених певним клієнтом
-	
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace S2_HW31._03._21
 {
-    class EventService 
+    static class EventService
     {
-        List<Event> events = new List<Event>();
+        public static List<Event> events = new();
+        public static List<Client> clients = new();
 
-        public void AddEvent(Event podiya)
+        public static void NewClient()
         {
-            events.Add(podiya);
+            Client client = new();
+            clients.Add(client);
+            Console.WriteLine("To add  a new event with this client, please enter (y): "); 
+            if(Console.ReadLine() == "y")
+            {
+                Event _event = new(client);
+                AddEvent(_event);
+            }
         }
-        public void DelEvent(Event podiya)
+
+        public static void FindClient()
         {
-            events.Remove(podiya);
+            Console.Clear();
+            if (clients.Any()==true)
+            {
+                Console.Write("Enter phone: ");
+                Console.WriteLine(clients.Find(x => x.Phone.Contains(Console.ReadLine())).ToString()); 
+            }
+            else
+            {
+                Console.WriteLine("There are no clients in the database.");
+            }
+            Console.ReadKey();
         }
-        public void ClearEvents()
+
+        public static void ShowClients()
+        {
+            Console.Clear();
+            if (clients.Any() == true)
+            {
+                Console.WriteLine("========Clients========");
+                foreach (var item in clients)
+                {
+                    Console.WriteLine(item.ToString());
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no clients in the database.");
+            }   
+            Console.ReadKey();
+        }
+        public static void AddEvent(Event _event)
+        {
+            events.Add(_event);
+        }
+        public static void DelEvent(Event _event)
+        {
+            events.Remove(_event);
+        }
+        public static void ClearEvents()
         {
             events.Clear();
         }
-        public void SearchDate(DateTime date)
+        public static void SearchDate(DateTime date)
         {
             foreach (var item in events)
             {
@@ -41,7 +77,7 @@ namespace S2_HW31._03._21
                 }
             }
         }
-        public void SearchPeriod(DateTime start, DateTime finish)
+        public static void SearchPeriod(DateTime start, DateTime finish)
         {
             foreach (var item in events)
             {
@@ -51,16 +87,6 @@ namespace S2_HW31._03._21
                 }
             }
         }
-        public void SearchClient(Client client)
-        {
-            foreach (var item in events)
-            {
-                if (item.Client == client)
-                {
-                    Console.WriteLine(item);
-                }
-            }
-        }
-
+        
     }
 }
