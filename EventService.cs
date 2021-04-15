@@ -19,7 +19,7 @@ namespace S2_HW31._03._21
             if(Console.ReadLine() == "y")
             {
                 Event _event = new(client);
-                AddEvent(_event);
+                events.Add(_event);
             }
         }
 
@@ -55,35 +55,56 @@ namespace S2_HW31._03._21
             }   
             Console.ReadKey();
         }
-        public static void AddEvent(Event _event)
+        public static void NewEvent()
         {
+            Console.Write("Enter phone: ");
+            Event _event = new(clients.Find(x => x.Phone.Contains(Console.ReadLine())));
             events.Add(_event);
         }
-        public static void DelEvent(Event _event)
+        public static void DelEvent()
         {
-            events.Remove(_event);
+            Console.Write("Enter event name: ");            
+            events.Remove(events.Find(x => x.Name.Contains(Console.ReadLine())));
         }
         public static void ClearEvents()
         {
             events.Clear();
         }
-        public static void SearchDate(DateTime date)
+        public static void FindDate()
         {
+            Console.Write("Enter date (mm/dd/yyyy): ");
+            DateTime date = DateTime.Parse(Console.ReadLine());
             foreach (var item in events)
             {
                 if (item.Date == date)
                 {
-                    Console.WriteLine(item);
+                    Console.WriteLine(item.ToString());
                 }
             }
         }
-        public static void SearchPeriod(DateTime start, DateTime finish)
+        public static void FindPeriod()
         {
+            Console.Write("Enter start (mm/dd/yyyy): ");
+            DateTime start = DateTime.Parse(Console.ReadLine());
+            Console.Write("Enter finish (mm/dd/yyyy): ");
+            DateTime finish = DateTime.Parse(Console.ReadLine());
             foreach (var item in events)
             {
                 if (item.Date >= start && item.Date <= finish)
                 {
-                    Console.WriteLine(item);
+                    Console.WriteLine(item.ToString());
+                }
+            }
+        }
+        public static void FindClientEvents()
+        {
+            Console.Write("Enter phone: ");
+            Client client = clients.Find(x => x.Phone.Contains(Console.ReadLine()));
+            foreach (var item in events)
+            {
+                if(item.Client == client)
+                {
+                    Console.WriteLine(item.ToString());
                 }
             }
         }
