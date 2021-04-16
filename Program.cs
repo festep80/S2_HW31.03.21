@@ -8,7 +8,7 @@ namespace S2_HW31._03._21
     {
         enum EventAgency { Exit, Clients, Events }
         enum Clients { Return, New, Find, Show }
-        enum Events { Return, New, Del, DelAll, FindDate, FindPeriod, FindClient }
+        enum Events { Return, New, Del, DelAll, FindDate, FindPeriod, FindClient, AddDays, AddWeeks }
         static void Main(string[] args)
         {
             EventAgency switchEventAgency = new();
@@ -71,7 +71,9 @@ namespace S2_HW31._03._21
                             Console.WriteLine("3.Delete all events");
                             Console.WriteLine("4.Find event by date");
                             Console.WriteLine("5.Find event by period");
-                            Console.WriteLine("3.Find event by client");
+                            Console.WriteLine("6.Find event by client");
+                            Console.WriteLine("7.Add days to event");
+                            Console.WriteLine("8.Add weeks to event");
                             Console.WriteLine("0.Return to main menu");
                             Console.Write("-> ");
                             switchEvents = (Events)Convert.ToInt32(Console.ReadLine());
@@ -96,6 +98,12 @@ namespace S2_HW31._03._21
                                     break;
                                 case Events.FindClient:
                                     EventService.FindClientEvents();
+                                    break;
+                                case Events.AddDays:
+                                    EventService.AddDaysToEvent();
+                                    break;
+                                case Events.AddWeeks:
+                                    EventService.AddWeeksToEvent();
                                     break;
                                 default:
                                     Console.WriteLine("Wrong choise!");

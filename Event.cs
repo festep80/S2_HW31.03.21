@@ -76,14 +76,6 @@ namespace S2_HW31._03._21
             return $"\n{counter}\nName: {Name}\nPeople: {People}\nPlace: {Place}\nDate: {Date}\nClient: {Client.ToString()}";
         }
 
-        public void AddDaysToEvent(int days)
-        {
-            this.date = date.AddDays(days);
-        }
-        public void AddWeeksToEvent(int weeks)
-        {
-            this.date = date.AddDays(weeks * 7);
-        }
        
     }
     

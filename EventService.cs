@@ -153,7 +153,8 @@ namespace S2_HW31._03._21
         public static void FindClientEvents()
         {
             Console.Write("Enter phone: ");
-            Client client = clients.Find(x => x.Phone.Contains(Console.ReadLine()));
+            string phone = Console.ReadLine();
+            Client client = clients.Find(x => x.Phone.Contains(phone));
             foreach (var item in events)
             {
                 if(item.Client == client)
@@ -161,7 +162,63 @@ namespace S2_HW31._03._21
                     Console.WriteLine(item.ToString());
                 }
             }
+            Console.ReadKey();
         }
-        
+        public static void AddDaysToEvent()
+        {
+            if (events.Any() == true)
+            {
+                Console.Write("Enter event name: ");
+                string name = Console.ReadLine();
+                int findName = 0;
+                foreach (var item in events)
+                {
+                    if (item.Name == name)
+                    {
+                        Console.Write("Enter count of weeks to add: ");
+                        int days = Convert.ToInt32(Console.ReadLine());
+                        item.Date.AddDays(days);
+                        findName++;
+                    }
+                }
+                if (findName == 0)
+                {
+                    Console.WriteLine("There are no events with this name in the database.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no events in the database.");
+            }
+            Console.ReadKey();
+        }    
+        public static void AddWeeksToEvent()
+        {
+            if (events.Any() == true)
+            {
+                Console.Write("Enter event name: ");
+                string name = Console.ReadLine();
+                int findName = 0;
+                foreach (var item in events)
+                {
+                    if (item.Name == name)
+                    {                       
+                        Console.Write("Enter count of weeks to add: ");
+                        int weeks = Convert.ToInt32(Console.ReadLine());
+                        item.Date.AddDays(weeks * 7);
+                        findName++;
+                    }
+                }
+                if (findName == 0)
+                {
+                    Console.WriteLine("There are no events with this name in the database.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no events in the database.");
+            }
+            Console.ReadKey();
+        }
     }
 }
